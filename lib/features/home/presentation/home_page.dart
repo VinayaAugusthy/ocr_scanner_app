@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ocr_scanner_app/core/constants/app_strings.dart';
+import 'package:ocr_scanner_app/core/theme/app_theme.dart';
 import 'package:ocr_scanner_app/features/card_scanner/presentation/card_scanner_page.dart';
 import 'package:ocr_scanner_app/features/passbook_scanner/presentation/passbook_scanner_page.dart';
 
@@ -7,10 +9,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('OCR Scanner'),
+        title: const Text(AppStrings.appTitle),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -20,14 +21,14 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'Choose a scanner',
-                style: theme.textTheme.titleLarge,
+                AppStrings.homeHeadline,
+                style: context.appTheme.textTheme.titleLarge,
               ),
               const SizedBox(height: 8),
               Text(
-                'Card and passbook flows use on-device OCR; parsing is custom.',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+                AppStrings.homeSubtitle,
+                style: context.appTheme.textTheme.bodyMedium?.copyWith(
+                  color: context.appTheme.colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: 32),
@@ -40,7 +41,7 @@ class HomePage extends StatelessWidget {
                   );
                 },
                 icon: const Icon(Icons.credit_card),
-                label: const Text('Card scanner'),
+                label: const Text(AppStrings.homeCardScannerButton),
               ),
               const SizedBox(height: 16),
               OutlinedButton.icon(
@@ -52,7 +53,7 @@ class HomePage extends StatelessWidget {
                   );
                 },
                 icon: const Icon(Icons.menu_book_outlined),
-                label: const Text('Passbook / bank document'),
+                label: const Text(AppStrings.homePassbookScannerButton),
               ),
             ],
           ),

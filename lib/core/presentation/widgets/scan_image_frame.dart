@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:ocr_scanner_app/core/constants/app_opacity.dart';
+import 'package:ocr_scanner_app/core/constants/app_strings.dart';
+import 'package:ocr_scanner_app/core/theme/app_theme.dart';
 
 class ScanImageFrame extends StatelessWidget {
   const ScanImageFrame({super.key, this.imagePath, this.showErrorHint = false});
@@ -10,9 +13,10 @@ class ScanImageFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final theme = context.appTheme;
     final borderColor = showErrorHint
-        ? theme.colorScheme.error.withValues(alpha: 0.6)
+        ? theme.colorScheme.error
+            .withValues(alpha: AppOpacity.scanFrameErrorBorder)
         : theme.colorScheme.outlineVariant;
 
     Widget child;
@@ -36,7 +40,7 @@ class ScanImageFrame extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: borderColor, width: 1.5),
           color: theme.colorScheme.surfaceContainerHighest.withValues(
-            alpha: 0.35,
+            alpha: AppOpacity.scanFrameBackground,
           ),
         ),
         child: ClipRRect(
@@ -55,7 +59,7 @@ class ScanImageFrame extends StatelessWidget {
           Icon(icon, size: 48, color: theme.colorScheme.onSurfaceVariant),
           const SizedBox(height: 8),
           Text(
-            'Scan preview',
+            AppStrings.scanPreviewLabel,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.onSurfaceVariant,
             ),

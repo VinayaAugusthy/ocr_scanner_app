@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ocr_scanner_app/core/constants/app_strings.dart';
 import 'package:ocr_scanner_app/core/presentation/formatters.dart';
+import 'package:ocr_scanner_app/core/theme/app_theme.dart';
 import 'package:ocr_scanner_app/core/presentation/widgets/scan_image_frame.dart';
 import 'package:ocr_scanner_app/features/passbook_scanner/presentation/bloc/passbook_scanner_bloc.dart';
 import 'package:ocr_scanner_app/features/passbook_scanner/presentation/bloc/passbook_scanner_event.dart';
@@ -33,7 +35,7 @@ class _PassbookScannerView extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        final theme = Theme.of(context);
+        final theme = context.appTheme;
         String? path;
         var errorHint = false;
         if (state is PassbookScannerSuccess) {
@@ -44,10 +46,10 @@ class _PassbookScannerView extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Passbook scanner'),
+            title: const Text(AppStrings.passbookScannerTitle),
             actions: [
               IconButton(
-                tooltip: 'Clear',
+                tooltip: AppStrings.clearTooltip,
                 onPressed: () => context.read<PassbookScannerBloc>().add(
                       const PassbookScannerReset(),
                     ),
@@ -70,7 +72,7 @@ class _PassbookScannerView extends StatelessWidget {
                                 const PassbookScannerPickCamera(),
                               ),
                       icon: const Icon(Icons.photo_camera_outlined),
-                      label: const Text('Camera'),
+                      label: const Text(AppStrings.cameraButton),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -82,7 +84,7 @@ class _PassbookScannerView extends StatelessWidget {
                                 const PassbookScannerPickGallery(),
                               ),
                       icon: const Icon(Icons.photo_library_outlined),
-                      label: const Text('Gallery'),
+                      label: const Text(AppStrings.galleryButton),
                     ),
                   ),
                 ],
@@ -92,25 +94,35 @@ class _PassbookScannerView extends StatelessWidget {
                 const LinearProgressIndicator(),
               ],
               const SizedBox(height: 28),
-              Text('Extracted', style: theme.textTheme.titleMedium),
+              Text(AppStrings.extractedSectionTitle,
+                  style: theme.textTheme.titleMedium),
               const SizedBox(height: 12),
               if (state is PassbookScannerSuccess) ...[
                 _InfoRow(
-                  label: 'Account holder',
+                  label: AppStrings.passbookFieldHolder,
                   value: displayOrDash(state.details.accountHolderName),
                 ),
                 _InfoRow(
-                  label: 'Account number',
+                  label: AppStrings.passbookFieldAccount,
                   value: displayOrDash(state.details.accountNumberDigits),
                 ),
                 _InfoRow(
-                  label: 'IFSC',
+                  label: AppStrings.passbookFieldIfsc,
                   value: displayOrDash(state.details.ifscCode),
                 ),
               ] else ...[
-                const _InfoRow(label: 'Account holder', value: '—'),
-                const _InfoRow(label: 'Account number', value: '—'),
-                const _InfoRow(label: 'IFSC', value: '—'),
+                const _InfoRow(
+                  label: AppStrings.passbookFieldHolder,
+                  value: AppStrings.emDash,
+                ),
+                const _InfoRow(
+                  label: AppStrings.passbookFieldAccount,
+                  value: AppStrings.emDash,
+                ),
+                const _InfoRow(
+                  label: AppStrings.passbookFieldIfsc,
+                  value: AppStrings.emDash,
+                ),
               ],
               if (state is PassbookScannerFailure) ...[
                 const SizedBox(height: 16),
@@ -137,7 +149,7 @@ class _InfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final theme = context.appTheme;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Row(

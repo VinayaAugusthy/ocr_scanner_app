@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ocr_scanner_app/core/constants/app_strings.dart';
 import 'package:ocr_scanner_app/core/presentation/formatters.dart';
+import 'package:ocr_scanner_app/core/theme/app_theme.dart';
 import 'package:ocr_scanner_app/core/presentation/widgets/scan_image_frame.dart';
 import 'package:ocr_scanner_app/features/card_scanner/presentation/bloc/card_scanner_bloc.dart';
 import 'package:ocr_scanner_app/features/card_scanner/presentation/bloc/card_scanner_event.dart';
@@ -33,7 +35,7 @@ class _CardScannerView extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        final theme = Theme.of(context);
+        final theme = context.appTheme;
         String? path;
         var errorHint = false;
         if (state is CardScannerSuccess) {
@@ -44,10 +46,10 @@ class _CardScannerView extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Card scanner'),
+            title: const Text(AppStrings.cardScannerTitle),
             actions: [
               IconButton(
-                tooltip: 'Clear',
+                tooltip: AppStrings.clearTooltip,
                 onPressed: () => context.read<CardScannerBloc>().add(
                       const CardScannerReset(),
                     ),
@@ -70,7 +72,7 @@ class _CardScannerView extends StatelessWidget {
                                 const CardScannerPickCamera(),
                               ),
                       icon: const Icon(Icons.photo_camera_outlined),
-                      label: const Text('Camera'),
+                      label: const Text(AppStrings.cameraButton),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -82,7 +84,7 @@ class _CardScannerView extends StatelessWidget {
                                 const CardScannerPickGallery(),
                               ),
                       icon: const Icon(Icons.photo_library_outlined),
-                      label: const Text('Gallery'),
+                      label: const Text(AppStrings.galleryButton),
                     ),
                   ),
                 ],
@@ -92,38 +94,50 @@ class _CardScannerView extends StatelessWidget {
                 const LinearProgressIndicator(),
               ],
               const SizedBox(height: 28),
-              Text('Extracted', style: theme.textTheme.titleMedium),
+              Text(AppStrings.extractedSectionTitle,
+                  style: theme.textTheme.titleMedium),
               const SizedBox(height: 12),
               if (state is CardScannerSuccess) ...[
                 _InfoRow(
-                  label: 'Card number',
+                  label: AppStrings.cardFieldNumber,
                   value: maskCardNumberForDisplay(
                     state.details.cardNumberDigits,
                   ),
                 ),
                 _InfoRow(
-                  label: 'Expiry',
+                  label: AppStrings.cardFieldExpiry,
                   value: formatExpiryDisplay(
                     state.details.expiryMonth,
                     state.details.expiryYearYY,
                   ),
                 ),
                 _InfoRow(
-                  label: 'Cardholder',
+                  label: AppStrings.cardFieldCardholder,
                   value: displayOrDash(state.details.holderName),
                 ),
                 _InfoRow(
-                  label: 'Luhn check',
-                  value: state.details.luhnValid ? 'Valid' : 'Invalid / unknown',
+                  label: AppStrings.cardFieldLuhn,
+                  value: state.details.luhnValid
+                      ? AppStrings.luhnValid
+                      : AppStrings.luhnInvalidOrUnknown,
                 ),
               ] else ...[
                 _InfoRow(
-                  label: 'Card number',
+                  label: AppStrings.cardFieldNumber,
                   value: maskCardNumberForDisplay(null),
                 ),
-                const _InfoRow(label: 'Expiry', value: '—'),
-                const _InfoRow(label: 'Cardholder', value: '—'),
-                const _InfoRow(label: 'Luhn check', value: '—'),
+                const _InfoRow(
+                  label: AppStrings.cardFieldExpiry,
+                  value: AppStrings.emDash,
+                ),
+                const _InfoRow(
+                  label: AppStrings.cardFieldCardholder,
+                  value: AppStrings.emDash,
+                ),
+                const _InfoRow(
+                  label: AppStrings.cardFieldLuhn,
+                  value: AppStrings.emDash,
+                ),
               ],
               if (state is CardScannerFailure) ...[
                 const SizedBox(height: 16),
@@ -150,7 +164,7 @@ class _InfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final theme = context.appTheme;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Row(
