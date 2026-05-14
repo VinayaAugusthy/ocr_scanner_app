@@ -9,12 +9,6 @@ abstract class PickImageRepository {
 sealed class PickImageResult extends Equatable {
   const PickImageResult();
 
-  bool get isSuccess => this is PickImageSuccess;
-
-  bool get isCancelled => this is PickImageCancelled;
-
-  bool get isFailure => this is PickImageFailure;
-
   @override
   List<Object?> get props => [];
 }

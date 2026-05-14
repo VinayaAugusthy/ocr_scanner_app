@@ -39,8 +39,15 @@ abstract final class AppStrings {
   static const String cardNumberMaskPrefix = 'XXXX XXXX XXXX ';
 
   // Bloc / flow (user-facing errors)
-  static const String errorTryAgainLater =
-      'Something went wrong. Please try again later.';
-  static const String errorPickImageFailed =
-      'Could not capture or open the image. Check permissions and try again.';
+  static const String ocrNoTextDetected = 'No text detected';
+  static const String ocrCouldNotReadImage =
+      'Could not read text from this image. Try again with better lighting.';
+  static const String cardCouldNotReadNumber =
+      'Could not read card number from the scan.';
+  static const String passbookCouldNotReadDetails =
+      'Could not read bank details from the scan.';
+  static const String duplicateScanUnchanged =
+      'Same scan as before — results unchanged.';
+  static const String ocrUnsupportedPlatform =
+      'On-device OCR is only available on Android and iOS.';
 }

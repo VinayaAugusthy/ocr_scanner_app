@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ocr_scanner_app/core/domain/repositories/pick_image_repository.dart';
+import 'package:ocr_scanner_app/features/shared_image_picker/domain/repositories/pick_image_repository.dart';
 
 class ImagePickerPickImageRepository implements PickImageRepository {
   ImagePickerPickImageRepository({

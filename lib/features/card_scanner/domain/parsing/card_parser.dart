@@ -32,6 +32,19 @@ String _normalizeOcrInput(String raw) {
       .replaceAll('\t', ' ');
 }
 
+/// Trims and collapses internal whitespace (common with ML Kit / gallery OCR).
+String? _normalizeHolderField(String? holder) {
+  if (holder == null) return null;
+  var t = holder
+      .replaceAll('\u00A0', ' ')
+      .replaceAll('\u202F', ' ')
+      .replaceAll('\u2007', ' ')
+      .replaceAll('\t', ' ');
+  t = t.trim();
+  if (t.isEmpty) return null;
+  return t.replaceAll(RegExp(r'\s+'), ' ');
+}
+
 CardDetails parseCard(String rawText) {
   final text = _normalizeOcrInput(rawText);
   final candidates = _extractPanCandidates(text);
@@ -49,7 +62,7 @@ CardDetails parseCard(String rawText) {
     cardNumberDigits: panDigits,
     expiryMonth: expiry?.$1,
     expiryYearYY: expiry?.$2,
-    holderName: holder,
+    holderName: _normalizeHolderField(holder),
     paymentNetwork: _detectPaymentNetwork(panDigits),
     luhnValid: panDigits != null && isValidCard(panDigits),
   );

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ocr_scanner_app/core/constants/app_strings.dart';
 import 'package:ocr_scanner_app/core/presentation/widgets/async_loading_overlay.dart';
 import 'package:ocr_scanner_app/core/presentation/widgets/camera_gallery_action_row.dart';
@@ -28,13 +27,19 @@ class _CardScannerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CardScannerBloc, CardScannerState>(
-      listenWhen: (prev, next) => next is CardScannerFailure,
+      listenWhen: (prev, next) =>
+          next is CardScannerFailure ||
+          (next is CardScannerSuccess && next.duplicateScan),
       listener: (context, state) {
+        if (!context.mounted) return;
         if (state is CardScannerFailure) {
-          if (!context.mounted) return;
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(state.message)));
+        } else if (state is CardScannerSuccess && state.duplicateScan) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(AppStrings.duplicateScanUnchanged)),
+          );
         }
       },
       builder: (context, state) {

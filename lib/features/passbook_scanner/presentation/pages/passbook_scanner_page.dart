@@ -16,9 +16,7 @@ class PassbookScannerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PassbookScannerInjector(
-      child: _PassbookScannerView(),
-    );
+    return const PassbookScannerInjector(child: _PassbookScannerView());
   }
 }
 
@@ -28,12 +26,18 @@ class _PassbookScannerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PassbookScannerBloc, PassbookScannerState>(
-      listenWhen: (prev, next) => next is PassbookScannerFailure,
+      listenWhen: (prev, next) =>
+          next is PassbookScannerFailure ||
+          (next is PassbookScannerSuccess && next.duplicateScan),
       listener: (context, state) {
+        if (!context.mounted) return;
         if (state is PassbookScannerFailure) {
-          if (!context.mounted) return;
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        } else if (state is PassbookScannerSuccess && state.duplicateScan) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
+            SnackBar(content: Text(AppStrings.duplicateScanUnchanged)),
           );
         }
       },
@@ -78,8 +82,9 @@ class _PassbookScannerView extends StatelessWidget {
                 ),
                 const SizedBox(height: 28),
                 PassbookScanResultSection(
-                  details:
-                      state is PassbookScannerSuccess ? state.details : null,
+                  details: state is PassbookScannerSuccess
+                      ? state.details
+                      : null,
                 ),
                 if (state is PassbookScannerFailure) ...[
                   const SizedBox(height: 16),

@@ -47,6 +47,11 @@ class BankDetails extends Equatable {
 
   final bool isMaskedAccount;
 
+  bool get hasExtractedFields =>
+      (ifscCode?.trim().isNotEmpty ?? false) ||
+      (accountNumberDigits?.trim().isNotEmpty ?? false) ||
+      (accountHolderName?.trim().isNotEmpty ?? false);
+
   @override
   List<Object?> get props => [
     accountHolderName,

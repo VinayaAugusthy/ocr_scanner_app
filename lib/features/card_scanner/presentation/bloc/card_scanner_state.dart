@@ -25,15 +25,15 @@ final class CardScannerSuccess extends CardScannerState {
   const CardScannerSuccess({
     required this.imagePath,
     required this.details,
-    this.rawOcrText,
+    this.duplicateScan = false,
   });
 
   final String imagePath;
   final CardDetails details;
-  final String? rawOcrText;
+  final bool duplicateScan;
 
   @override
-  List<Object?> get props => [imagePath, details, rawOcrText];
+  List<Object?> get props => [imagePath, details, duplicateScan];
 }
 
 final class CardScannerFailure extends CardScannerState {

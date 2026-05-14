@@ -25,15 +25,15 @@ final class PassbookScannerSuccess extends PassbookScannerState {
   const PassbookScannerSuccess({
     required this.imagePath,
     required this.details,
-    this.rawOcrText,
+    this.duplicateScan = false,
   });
 
   final String imagePath;
   final BankDetails details;
-  final String? rawOcrText;
+  final bool duplicateScan;
 
   @override
-  List<Object?> get props => [imagePath, details, rawOcrText];
+  List<Object?> get props => [imagePath, details, duplicateScan];
 }
 
 final class PassbookScannerFailure extends PassbookScannerState {
