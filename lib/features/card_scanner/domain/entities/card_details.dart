@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-/// Parsed card fields from OCR text. [cardNumberDigits] is digits only, no spaces.
 class CardDetails extends Equatable {
   const CardDetails({
     this.cardNumberDigits,
@@ -8,7 +7,7 @@ class CardDetails extends Equatable {
     this.expiryYearYY,
     this.holderName,
     this.paymentNetwork,
-    required this.luhnValid,
+    this.luhnValid = false,
   });
 
   final String? cardNumberDigits;

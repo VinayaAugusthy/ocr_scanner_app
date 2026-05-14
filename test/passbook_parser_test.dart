@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ocr_scanner_app/domain/entities/passbook_account_candidate.dart';
-import 'package:ocr_scanner_app/domain/parsing/passbook_parser.dart';
+import 'package:ocr_scanner_app/features/passbook_scanner/domain/entities/passbook_account_candidate.dart';
+import 'package:ocr_scanner_app/features/passbook_scanner/domain/parsing/passbook_parser.dart';
 
 void main() {
   group('findIfsc', () {

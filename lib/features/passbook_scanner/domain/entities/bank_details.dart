@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:ocr_scanner_app/domain/entities/passbook_account_candidate.dart';
+import 'package:ocr_scanner_app/features/passbook_scanner/domain/entities/passbook_account_candidate.dart';
 
 class BankDetails extends Equatable {
   const BankDetails({

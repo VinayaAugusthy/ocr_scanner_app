@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
-import 'package:ocr_scanner_app/domain/entities/card_details.dart';
-import 'package:ocr_scanner_app/domain/parsing/luhn.dart';
+import 'package:ocr_scanner_app/features/card_scanner/domain/entities/card_details.dart';
+import 'package:ocr_scanner_app/features/card_scanner/domain/parsing/luhn.dart';
 
 bool _isAsciiDigit(String ch) =>
     ch.length == 1 && ch.codeUnitAt(0) >= 0x30 && ch.codeUnitAt(0) <= 0x39;
@@ -68,7 +68,6 @@ bool _isPanRunChar(String c) {
   return _ocrDigitMapFull(c) != null;
 }
 
-/// Full OCR letter→digit map (used only on digit-heavy runs).
 int? _ocrDigitMapFull(String c) {
   switch (c) {
     case '0':

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ocr_scanner_app/domain/parsing/card_parser.dart';
+import 'package:ocr_scanner_app/features/card_scanner/domain/parsing/card_parser.dart';
 
 void main() {
   group('parseCard', () {

@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
-import 'package:ocr_scanner_app/domain/entities/bank_details.dart';
-import 'package:ocr_scanner_app/domain/entities/passbook_account_candidate.dart';
+import 'package:ocr_scanner_app/features/passbook_scanner/domain/entities/bank_details.dart';
+import 'package:ocr_scanner_app/features/passbook_scanner/domain/entities/passbook_account_candidate.dart';
 
 final _dateLikeSeparatedRe = RegExp(r'^\d{1,2}[-/]\d{1,2}[-/]\d{2,4}$');
 final _nonAlnumRe = RegExp(r'[^A-Z0-9]');

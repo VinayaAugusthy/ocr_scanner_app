@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ocr_scanner_app/core/constants/app_strings.dart';
 import 'package:ocr_scanner_app/core/theme/app_theme.dart';
-import 'package:ocr_scanner_app/features/card_scanner/presentation/card_scanner_page.dart';
-import 'package:ocr_scanner_app/features/passbook_scanner/presentation/passbook_scanner_page.dart';
+import 'package:ocr_scanner_app/features/card_scanner/presentation/pages/card_scanner_page.dart';
+import 'package:ocr_scanner_app/features/passbook_scanner/presentation/pages/passbook_scanner_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

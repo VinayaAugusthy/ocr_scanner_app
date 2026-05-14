@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:ocr_scanner_app/domain/entities/card_details.dart';
+import 'package:ocr_scanner_app/features/card_scanner/domain/entities/card_details.dart';
 
 sealed class CardScannerState extends Equatable {
   const CardScannerState();
@@ -13,7 +13,12 @@ final class CardScannerInitial extends CardScannerState {
 }
 
 final class CardScannerProcessing extends CardScannerState {
-  const CardScannerProcessing();
+  const CardScannerProcessing({this.retainedImagePath});
+
+  final String? retainedImagePath;
+
+  @override
+  List<Object?> get props => [retainedImagePath];
 }
 
 final class CardScannerSuccess extends CardScannerState {
@@ -32,10 +37,12 @@ final class CardScannerSuccess extends CardScannerState {
 }
 
 final class CardScannerFailure extends CardScannerState {
-  const CardScannerFailure(this.message);
+  const CardScannerFailure(this.message, {this.retainedImagePath});
 
   final String message;
 
+  final String? retainedImagePath;
+
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, retainedImagePath];
 }

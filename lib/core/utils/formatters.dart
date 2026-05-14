@@ -9,11 +9,13 @@ String maskCardNumberForDisplay(String? digitsOnly) {
 }
 
 String formatExpiryDisplay(int? month, int? yearYY) {
-  if (month == null || yearYY == null) return AppStrings.emDash;  final mm = month.toString().padLeft(2, '0');
+  if (month == null || yearYY == null) return AppStrings.emDash;
+  final mm = month.toString().padLeft(2, '0');
   final yy = yearYY.toString().padLeft(2, '0');
   return '$mm/$yy';
 }
 
 String displayOrDash(String? value) {
-  if (value == null || value.trim().isEmpty) return AppStrings.emDash;  return value.trim();
+  if (value == null || value.trim().isEmpty) return AppStrings.emDash;
+  return value.trim();
 }

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ocr_scanner_app/domain/parsing/luhn.dart';
+import 'package:ocr_scanner_app/features/card_scanner/domain/parsing/luhn.dart';
 
 void main() {
   group('isValidCard', () {

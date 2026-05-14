@@ -20,7 +20,34 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   flutter::DartProject project(L"data");
 
   std::vector<std::string> command_line_arguments =
-      GetCommandLineArguments();
+      GetCommand. Add loading overlay later
+
+Eventually better than inline progress bar.
+
+Something like:
+
+Stack(
+  children: [
+    content,
+    if (loading)
+      const ColoredBox(
+        color: Colors.black26,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+  ],
+)
+10. Consider Feature-Level DI
+
+Eventually:
+
+features/
+  card_scanner/
+    di/
+      card_scanner_injector.dart
+
+This scales much better.guments();
 
   project.set_dart_entrypoint_arguments(std::move(command_line_arguments));
 

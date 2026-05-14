@@ -5,7 +5,6 @@ bool isValidCard(String cardNumber) {
   if (digits.length < 13 || digits.length > 19) {
     return false;
   }
-  // All digits identical (000…0, 111…1, etc.) — optional OCR sanity check.
   final first = digits.codeUnitAt(0);
   var allDigitsIdentical = true;
   for (var i = 1; i < digits.length; i++) {

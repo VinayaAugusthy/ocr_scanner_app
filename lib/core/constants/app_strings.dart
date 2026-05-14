@@ -41,4 +41,6 @@ abstract final class AppStrings {
   // Bloc / flow (user-facing errors)
   static const String errorTryAgainLater =
       'Something went wrong. Please try again later.';
+  static const String errorPickImageFailed =
+      'Could not capture or open the image. Check permissions and try again.';
 }
