@@ -29,9 +29,9 @@ class _CardScannerView extends StatelessWidget {
       listenWhen: (prev, next) => next is CardScannerFailure,
       listener: (context, state) {
         if (state is CardScannerFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
         }
       },
       builder: (context, state) {
@@ -51,8 +51,8 @@ class _CardScannerView extends StatelessWidget {
               IconButton(
                 tooltip: AppStrings.clearTooltip,
                 onPressed: () => context.read<CardScannerBloc>().add(
-                      const CardScannerReset(),
-                    ),
+                  const CardScannerReset(),
+                ),
                 icon: const Icon(Icons.refresh),
               ),
             ],
@@ -69,8 +69,8 @@ class _CardScannerView extends StatelessWidget {
                       onPressed: state is CardScannerProcessing
                           ? null
                           : () => context.read<CardScannerBloc>().add(
-                                const CardScannerPickCamera(),
-                              ),
+                              const CardScannerPickCamera(),
+                            ),
                       icon: const Icon(Icons.photo_camera_outlined),
                       label: const Text(AppStrings.cameraButton),
                     ),
@@ -81,8 +81,8 @@ class _CardScannerView extends StatelessWidget {
                       onPressed: state is CardScannerProcessing
                           ? null
                           : () => context.read<CardScannerBloc>().add(
-                                const CardScannerPickGallery(),
-                              ),
+                              const CardScannerPickGallery(),
+                            ),
                       icon: const Icon(Icons.photo_library_outlined),
                       label: const Text(AppStrings.galleryButton),
                     ),
@@ -94,8 +94,10 @@ class _CardScannerView extends StatelessWidget {
                 const LinearProgressIndicator(),
               ],
               const SizedBox(height: 28),
-              Text(AppStrings.extractedSectionTitle,
-                  style: theme.textTheme.titleMedium),
+              Text(
+                AppStrings.extractedSectionTitle,
+                style: theme.textTheme.titleMedium,
+              ),
               const SizedBox(height: 12),
               if (state is CardScannerSuccess) ...[
                 _InfoRow(
@@ -116,6 +118,10 @@ class _CardScannerView extends StatelessWidget {
                   value: displayOrDash(state.details.holderName),
                 ),
                 _InfoRow(
+                  label: AppStrings.cardFieldNetwork,
+                  value: displayOrDash(state.details.paymentNetwork),
+                ),
+                _InfoRow(
                   label: AppStrings.cardFieldLuhn,
                   value: state.details.luhnValid
                       ? AppStrings.luhnValid
@@ -132,6 +138,10 @@ class _CardScannerView extends StatelessWidget {
                 ),
                 const _InfoRow(
                   label: AppStrings.cardFieldCardholder,
+                  value: AppStrings.emDash,
+                ),
+                const _InfoRow(
+                  label: AppStrings.cardFieldNetwork,
                   value: AppStrings.emDash,
                 ),
                 const _InfoRow(

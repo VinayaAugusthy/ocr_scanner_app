@@ -7,6 +7,7 @@ class CardDetails extends Equatable {
     this.expiryMonth,
     this.expiryYearYY,
     this.holderName,
+    this.paymentNetwork,
     required this.luhnValid,
   });
 
@@ -14,12 +15,20 @@ class CardDetails extends Equatable {
   final int? expiryMonth;
   final int? expiryYearYY;
   final String? holderName;
+
+  final String? paymentNetwork;
   final bool luhnValid;
 
   bool get hasCardNumber =>
       cardNumberDigits != null && cardNumberDigits!.isNotEmpty;
 
   @override
-  List<Object?> get props =>
-      [cardNumberDigits, expiryMonth, expiryYearYY, holderName, luhnValid];
+  List<Object?> get props => [
+    cardNumberDigits,
+    expiryMonth,
+    expiryYearYY,
+    holderName,
+    paymentNetwork,
+    luhnValid,
+  ];
 }

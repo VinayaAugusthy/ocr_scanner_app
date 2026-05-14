@@ -21,6 +21,7 @@ abstract final class AppStrings {
   static const String cardFieldExpiry = 'Expiry';
   static const String cardFieldCardholder = 'Cardholder';
   static const String cardFieldLuhn = 'Luhn check';
+  static const String cardFieldNetwork = 'Network';
   static const String luhnValid = 'Valid';
   static const String luhnInvalidOrUnknown = 'Invalid / unknown';
 
