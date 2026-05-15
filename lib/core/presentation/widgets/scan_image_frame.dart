@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:ocr_scanner_app/core/constants/app_colors.dart';
 import 'package:ocr_scanner_app/core/constants/app_opacity.dart';
 import 'package:ocr_scanner_app/core/constants/app_strings.dart';
 import 'package:ocr_scanner_app/core/theme/app_theme.dart';
@@ -15,9 +16,10 @@ class ScanImageFrame extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.appTheme;
     final borderColor = showErrorHint
-        ? theme.colorScheme.error
-            .withValues(alpha: AppOpacity.scanFrameErrorBorder)
-        : theme.colorScheme.outlineVariant;
+        ? theme.colorScheme.error.withValues(
+            alpha: AppOpacity.scanFrameErrorBorder,
+          )
+        : AppColors.themeSeed;
 
     Widget child;
     if (imagePath != null &&
@@ -56,12 +58,12 @@ class ScanImageFrame extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 48, color: theme.colorScheme.onSurfaceVariant),
+          Icon(icon, size: 48, color: AppColors.themeSeed),
           const SizedBox(height: 8),
           Text(
             AppStrings.scanPreviewLabel,
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
+              color: AppColors.themeSeed,
             ),
           ),
         ],

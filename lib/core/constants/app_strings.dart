@@ -6,8 +6,6 @@ abstract final class AppStrings {
 
   // Home
   static const String homeHeadline = 'Choose a scanner';
-  static const String homeSubtitle =
-      'Card and passbook flows use on-device OCR; parsing is custom.';
   static const String homeCardScannerButton = 'Card scanner';
   static const String homePassbookScannerButton = 'Passbook / bank document';
 
@@ -16,7 +14,7 @@ abstract final class AppStrings {
   static const String clearTooltip = 'Clear';
   static const String cameraButton = 'Camera';
   static const String galleryButton = 'Gallery';
-  static const String extractedSectionTitle = 'Extracted';
+  static const String extractedSectionTitle = 'Extracted Bank Details';
   static const String cardFieldNumber = 'Card number';
   static const String cardFieldExpiry = 'Expiry';
   static const String cardFieldCardholder = 'Cardholder';

@@ -17,73 +17,78 @@ class CardScanResultSection extends StatelessWidget {
     final theme = context.appTheme;
     final detailsData = details;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          AppStrings.extractedSectionTitle,
-          style: theme.textTheme.titleMedium,
-        ),
-        const SizedBox(height: 12),
-        if (detailsData != null) ...[
-          InfoRow(
-            labelWidth: _kCardLabelWidth,
-            label: AppStrings.cardFieldNumber,
-            value: maskCardNumberForDisplay(detailsData.cardNumberDigits),
-          ),
-          InfoRow(
-            labelWidth: _kCardLabelWidth,
-            label: AppStrings.cardFieldExpiry,
-            value: formatExpiryDisplay(
-              detailsData.expiryMonth,
-              detailsData.expiryYearYY,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              AppStrings.extractedSectionTitle,
+              style: theme.textTheme.titleLarge,
             ),
           ),
-          InfoRow(
-            labelWidth: _kCardLabelWidth,
-            label: AppStrings.cardFieldCardholder,
-            value: displayOrDash(detailsData.holderName),
-          ),
-          InfoRow(
-            labelWidth: _kCardLabelWidth,
-            label: AppStrings.cardFieldNetwork,
-            value: displayOrDash(detailsData.paymentNetwork),
-          ),
-          InfoRow(
-            labelWidth: _kCardLabelWidth,
-            label: AppStrings.cardFieldLuhn,
-            value: detailsData.luhnValid
-                ? AppStrings.luhnValid
-                : AppStrings.luhnInvalidOrUnknown,
-          ),
-        ] else ...[
-          InfoRow(
-            labelWidth: _kCardLabelWidth,
-            label: AppStrings.cardFieldNumber,
-            value: maskCardNumberForDisplay(null),
-          ),
-          const InfoRow(
-            labelWidth: _kCardLabelWidth,
-            label: AppStrings.cardFieldExpiry,
-            value: AppStrings.emDash,
-          ),
-          const InfoRow(
-            labelWidth: _kCardLabelWidth,
-            label: AppStrings.cardFieldCardholder,
-            value: AppStrings.emDash,
-          ),
-          const InfoRow(
-            labelWidth: _kCardLabelWidth,
-            label: AppStrings.cardFieldNetwork,
-            value: AppStrings.emDash,
-          ),
-          const InfoRow(
-            labelWidth: _kCardLabelWidth,
-            label: AppStrings.cardFieldLuhn,
-            value: AppStrings.emDash,
-          ),
+          const SizedBox(height: 20),
+          if (detailsData != null) ...[
+            InfoRow(
+              labelWidth: _kCardLabelWidth,
+              label: AppStrings.cardFieldNumber,
+              value: maskCardNumberForDisplay(detailsData.cardNumberDigits),
+            ),
+            InfoRow(
+              labelWidth: _kCardLabelWidth,
+              label: AppStrings.cardFieldExpiry,
+              value: formatExpiryDisplay(
+                detailsData.expiryMonth,
+                detailsData.expiryYearYY,
+              ),
+            ),
+            InfoRow(
+              labelWidth: _kCardLabelWidth,
+              label: AppStrings.cardFieldCardholder,
+              value: displayOrDash(detailsData.holderName),
+            ),
+            InfoRow(
+              labelWidth: _kCardLabelWidth,
+              label: AppStrings.cardFieldNetwork,
+              value: displayOrDash(detailsData.paymentNetwork),
+            ),
+            InfoRow(
+              labelWidth: _kCardLabelWidth,
+              label: AppStrings.cardFieldLuhn,
+              value: detailsData.luhnValid
+                  ? AppStrings.luhnValid
+                  : AppStrings.luhnInvalidOrUnknown,
+            ),
+          ] else ...[
+            InfoRow(
+              labelWidth: _kCardLabelWidth,
+              label: AppStrings.cardFieldNumber,
+              value: maskCardNumberForDisplay(null),
+            ),
+            const InfoRow(
+              labelWidth: _kCardLabelWidth,
+              label: AppStrings.cardFieldExpiry,
+              value: AppStrings.emDash,
+            ),
+            const InfoRow(
+              labelWidth: _kCardLabelWidth,
+              label: AppStrings.cardFieldCardholder,
+              value: AppStrings.emDash,
+            ),
+            const InfoRow(
+              labelWidth: _kCardLabelWidth,
+              label: AppStrings.cardFieldNetwork,
+              value: AppStrings.emDash,
+            ),
+            const InfoRow(
+              labelWidth: _kCardLabelWidth,
+              label: AppStrings.cardFieldLuhn,
+              value: AppStrings.emDash,
+            ),
+          ],
         ],
-      ],
+      ),
     );
   }
 }

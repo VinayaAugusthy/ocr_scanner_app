@@ -15,42 +15,47 @@ class PassbookScanResultSection extends StatelessWidget {
     final theme = context.appTheme;
     final detailsData = details;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          AppStrings.extractedSectionTitle,
-          style: theme.textTheme.titleMedium,
-        ),
-        const SizedBox(height: 12),
-        if (detailsData != null) ...[
-          InfoRow(
-            label: AppStrings.passbookFieldHolder,
-            value: displayOrDash(detailsData.accountHolderName),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Text(
+              AppStrings.extractedSectionTitle,
+              style: theme.textTheme.titleLarge,
+            ),
           ),
-          InfoRow(
-            label: AppStrings.passbookFieldAccount,
-            value: displayOrDash(detailsData.accountNumberDigits),
-          ),
-          InfoRow(
-            label: AppStrings.passbookFieldIfsc,
-            value: displayOrDash(detailsData.ifscCode),
-          ),
-        ] else ...[
-          const InfoRow(
-            label: AppStrings.passbookFieldHolder,
-            value: AppStrings.emDash,
-          ),
-          const InfoRow(
-            label: AppStrings.passbookFieldAccount,
-            value: AppStrings.emDash,
-          ),
-          const InfoRow(
-            label: AppStrings.passbookFieldIfsc,
-            value: AppStrings.emDash,
-          ),
+          const SizedBox(height: 20),
+          if (detailsData != null) ...[
+            InfoRow(
+              label: AppStrings.passbookFieldHolder,
+              value: displayOrDash(detailsData.accountHolderName),
+            ),
+            InfoRow(
+              label: AppStrings.passbookFieldAccount,
+              value: displayOrDash(detailsData.accountNumberDigits),
+            ),
+            InfoRow(
+              label: AppStrings.passbookFieldIfsc,
+              value: displayOrDash(detailsData.ifscCode),
+            ),
+          ] else ...[
+            const InfoRow(
+              label: AppStrings.passbookFieldHolder,
+              value: AppStrings.emDash,
+            ),
+            const InfoRow(
+              label: AppStrings.passbookFieldAccount,
+              value: AppStrings.emDash,
+            ),
+            const InfoRow(
+              label: AppStrings.passbookFieldIfsc,
+              value: AppStrings.emDash,
+            ),
+          ],
         ],
-      ],
+      ),
     );
   }
 }

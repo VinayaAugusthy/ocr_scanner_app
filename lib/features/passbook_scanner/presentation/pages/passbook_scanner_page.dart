@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ocr_scanner_app/core/constants/app_colors.dart';
 import 'package:ocr_scanner_app/core/constants/app_strings.dart';
 import 'package:ocr_scanner_app/core/presentation/widgets/async_loading_overlay.dart';
 import 'package:ocr_scanner_app/core/presentation/widgets/camera_gallery_action_row.dart';
@@ -59,6 +60,9 @@ class _PassbookScannerView extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: AppColors.themeSeed,
+            foregroundColor: AppColors.white,
+            centerTitle: true,
             title: const Text(AppStrings.passbookScannerTitle),
             actions: [
               IconButton(

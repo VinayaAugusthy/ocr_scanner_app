@@ -26,6 +26,7 @@ class OcrScannerApp extends StatelessWidget {
         title: AppStrings.materialAppTitle,
         theme: AppTheme.light(),
         home: const HomePage(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

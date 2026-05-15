@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ocr_scanner_app/core/constants/app_colors.dart';
 import 'package:ocr_scanner_app/core/constants/app_strings.dart';
 import 'package:ocr_scanner_app/core/presentation/widgets/async_loading_overlay.dart';
 import 'package:ocr_scanner_app/core/presentation/widgets/camera_gallery_action_row.dart';
@@ -15,9 +17,7 @@ class CardScannerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CardScannerInjector(
-      child: _CardScannerView(),
-    );
+    return const CardScannerInjector(child: _CardScannerView());
   }
 }
 
@@ -60,6 +60,9 @@ class _CardScannerView extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: AppColors.themeSeed,
+            foregroundColor: AppColors.white,
+            centerTitle: true,
             title: const Text(AppStrings.cardScannerTitle),
             actions: [
               IconButton(
