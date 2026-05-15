@@ -187,10 +187,45 @@ bool _isDigitHeavyPanRun(String run) {
   return digitCount / total >= 0.55;
 }
 
+bool _panCharDigitLikeAt(String run, int idx) {
+  if (idx < 0 || idx >= run.length) {
+    return false;
+  }
+  final ch = run[idx];
+  if (_isAsciiDigit(ch)) {
+    return true;
+  }
+  return _ocrDigitMapStrict(ch) != null || _ocrDigitMapFull(ch) != null;
+}
+
+int _panNeighborDigitIndex(String run, int from, {required bool forward}) {
+  final step = forward ? 1 : -1;
+  for (var j = from; j >= 0 && j < run.length; j += step) {
+    final ch = run[j];
+    if (ch == ' ' || ch == '-') {
+      continue;
+    }
+    return j;
+  }
+  return -1;
+}
+
+bool _panOcrCharSurroundedByDigits(String run, int i) {
+  final prev = _panNeighborDigitIndex(run, i - 1, forward: false);
+  final next = _panNeighborDigitIndex(run, i + 1, forward: true);
+  return prev >= 0 &&
+      next >= 0 &&
+      _panCharDigitLikeAt(run, prev) &&
+      _panCharDigitLikeAt(run, next);
+}
+
 String _normalizePanRun(String run) {
   final aggressive = _isDigitHeavyPanRun(run);
   final b = StringBuffer();
-  for (final ch in run.split('')) {
+
+  for (var i = 0; i < run.length; i++) {
+    final ch = run[i];
+
     if (ch == ' ' || ch == '-') {
       continue;
     }
@@ -198,25 +233,51 @@ String _normalizePanRun(String run) {
       b.write(ch);
       continue;
     }
-    final d = aggressive ? _ocrDigitMapFull(ch) : _ocrDigitMapStrict(ch);
+
+    var d = _ocrDigitMapStrict(ch);
+    if (d == null && aggressive && _panOcrCharSurroundedByDigits(run, i)) {
+      d = _ocrDigitMapFull(ch);
+    }
     if (d != null) {
       b.write('$d');
     }
   }
+
   return b.toString();
+}
+
+bool _isPlausiblePanContext(String input, int start, int end) {
+  if (end < input.length && _letterRe.hasMatch(input[end])) {
+    return false;
+  }
+  if (start > 0 && _letterRe.hasMatch(input[start - 1])) {
+    return false;
+  }
+  return true;
 }
 
 List<String> _extractPanCandidates(String input) {
   final seen = <String>{};
   final ordered = <String>[];
   final buf = StringBuffer();
+  var runStart = 0;
+  var index = 0;
+  var inRun = false;
 
   void flush() {
     if (buf.isEmpty) {
       return;
     }
     final run = buf.toString();
+    final start = runStart;
+    final end = index;
     buf.clear();
+    inRun = false;
+
+    if (!_isPlausiblePanContext(input, start, end)) {
+      return;
+    }
+
     final digits = _normalizePanRun(run);
     if (digits.length >= 13 && digits.length <= 19 && seen.add(digits)) {
       ordered.add(digits);
@@ -226,10 +287,15 @@ List<String> _extractPanCandidates(String input) {
   for (final unit in input.runes) {
     final ch = String.fromCharCode(unit);
     if (_isPanRunChar(ch)) {
+      if (!inRun) {
+        runStart = index;
+        inRun = true;
+      }
       buf.write(ch);
     } else {
       flush();
     }
+    index += ch.length;
   }
   flush();
   return ordered;

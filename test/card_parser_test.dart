@@ -271,13 +271,13 @@ JOHN DOE
 
     test('handles OCR B as 8 in aggressive digit run', () {
       const raw = '''
-4242 4242 4242 42B2
+37B2 8224 6310 005
 12/29
 ''';
 
       final d = parseCard(raw);
 
-      expect(d.cardNumberDigits, isNotNull);
+      expect(d.cardNumberDigits, '378282246310005');
     });
 
     test('ignores short numeric runs', () {
