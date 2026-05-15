@@ -55,6 +55,13 @@ EXP 1228
       expect(d.expiryYearYY, 28);
     });
 
+    test('parses mandatory expiry formats slash hyphen and compact', () {
+      expect(parseCard('4242424242424242\n12/30').expiryMonth, 12);
+      expect(parseCard('4242424242424242\n12/30').expiryYearYY, 30);
+      expect(parseCard('4242424242424242\n12-30').expiryMonth, 12);
+      expect(parseCard('4242424242424242\nEXP 1230').expiryMonth, 12);
+    });
+
     test('extracts expiry with hyphen separator', () {
       const raw = '''
 4242424242424242

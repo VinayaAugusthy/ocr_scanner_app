@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ocr_scanner_app/core/constants/app_strings.dart';
-import 'package:ocr_scanner_app/core/utils/formatters.dart';
 import 'package:ocr_scanner_app/core/presentation/widgets/info_row.dart';
 import 'package:ocr_scanner_app/core/theme/app_theme.dart';
+import 'package:ocr_scanner_app/core/utils/formatters.dart';
 import 'package:ocr_scanner_app/features/passbook_scanner/domain/entities/bank_details.dart';
 
 class PassbookScanResultSection extends StatelessWidget {
@@ -16,7 +16,7 @@ class PassbookScanResultSection extends StatelessWidget {
     final detailsData = details;
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
