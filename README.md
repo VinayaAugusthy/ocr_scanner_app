@@ -80,18 +80,15 @@ flutter test test/card_parser_test.dart
 
 ## What was skipped and why
 
-| Item                          | Reason                                |
-| ----------------------------- | ------------------------------------- |
-| Web/desktop support           | ML Kit OCR integrated only for mobile |
-| Cloud OCR / backend           | Scope limited to offline OCR          |
-| Live camera OCR               | Simpler still-image workflow used     |
-| Scan history / export         | No database or persistence added      |
-| Localization                  | English-only UI                       |
-| Dark mode                     | Light theme only                      |
-| Additional bank fields        | Focused only on required extraction   |
-| CVV / magnetic stripe reading | Security reasons                      |
-| Production signing            | Assignment / demo scope               |
-| Device integration tests      | OCR testing can be hardware-dependent |
+| Item                     | Reason                                |
+| ------------------------ | ------------------------------------- |
+| Web/desktop support      | ML Kit OCR integrated only for mobile |
+| Localization             | English-only UI                       |
+| Dark mode                | Light theme only                      |
+| Additional bank fields   | Focused only on required extraction   |
+| Device integration tests | OCR testing can be hardware-dependent |
+
+Blur and heavy crop are not detected on-device; the app relies on ML Kit quality and asks the user to rescan when text cannot be read or parsed.”
 
 ## Project structure
 
